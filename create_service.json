@@ -1,0 +1,26 @@
+{
+	"cluster": "ecs-blog-ECSCluster-1BC08Z8YA1A5X",
+	"serviceName": "ecs-blog-svc",
+	"taskDefinition": "arn:aws:ecs:us-east-2:111111111111:task-definition/ecs-blog-svc:1",
+	"loadBalancers": [
+		{
+			"targetGroupArn": "arn:aws:elasticloadbalancing:us-east-2:111111111111:targetgroup/ecs-b-Targe-NP1KC1KYAEK1/01cf50be3fa1524c",
+			"containerName": "ecs-blog-svc",
+			"containerPort": 80
+		}
+	],
+	"launchType": "FARGATE",
+	"schedulingStrategy": "REPLICA",
+	"deploymentController": {
+		"type": "CODE_DEPLOY"
+	},
+	"platformVersion": "LATEST",
+	"networkConfiguration": {
+		"awsvpcConfiguration": {
+			"assignPublicIp": "ENABLED",
+			"securityGroups": ["sg-08fdb4f721268b4f0"],
+			"subnets": ["subnet-0d348d95b7121ae37", "subnet-0075725bb118146dd"]
+		}
+	},
+	"desiredCount": 2
+}
