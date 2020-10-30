@@ -3,13 +3,13 @@
 ### 1 - AWS CLI V2: https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
 ### 2 - Packages: git, jq, docker
 
-## Initialize & create ecr repo
+## 1 - Initialize & create ecr repo
 export AWS_DEFAULT_REGION=eu-west-1
 export ecs_repo='ecs-sample-app'
 
 aws ecr create-repository --repository-name $ecs_repo --region eu-west-1
 
-## Build docker image v1 & v2
+## 2 - Build docker image v1 & v2
 cd Docker/
 echo "Repo: "$ecs_repo
 sleep 5
@@ -39,3 +39,7 @@ docker push 703043637716.dkr.ecr.eu-west-1.amazonaws.com/$ecs_repo:v2
 
 cd ../
 
+## 3 - Launch stack
+stack_name='stack-ecs-canary'
+
+aws cloudformation create-stack  --stack-name $stack_name --template-body file://stack-ecs-canary.yaml --parameters  ParameterKey=KeyPairName,ParameterValue=MyKey ParameterKey=InstanceType,ParameterValue=t1.micro
