@@ -41,5 +41,4 @@ cd ../
 
 ## 3 - Launch stack
 stack_name='stack-ecs-canary'
-
-aws cloudformation create-stack  --stack-name $stack_name --template-body file://stack-ecs-canary.yaml --parameters  ParameterKey=KeyPairName,ParameterValue=MyKey ParameterKey=InstanceType,ParameterValue=t1.micro
+aws cloudformation create-stack --stackname $stack_nameb--template-body file:///stack-ecs-canary.yaml --parameters file:///stack-ecs-canary-params.json 
