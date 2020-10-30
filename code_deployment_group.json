@@ -1,0 +1,44 @@
+{
+	"applicationName": "ecs-blog-app",
+	"deploymentGroupName": "ecs-blog-app-dg",
+	"deploymentConfigName": "CodeDeployDefault.ECSLinear10PercentEvery1Minutes",
+	"serviceRoleArn": "arn:aws:iam::111111111111:role/ecs-blog-EcsRoleForCodeDeploy-176BC3DEKYQ0E",
+	"deploymentStyle": {
+		"deploymentType": "BLUE_GREEN",
+		"deploymentOption": "WITH_TRAFFIC_CONTROL"
+	},
+	"blueGreenDeploymentConfiguration": {
+		"terminateBlueInstancesOnDeploymentSuccess": {
+			"action": "TERMINATE",
+			"terminationWaitTimeInMinutes": 5
+		},
+		"deploymentReadyOption": {
+			"actionOnTimeout": "CONTINUE_DEPLOYMENT"
+		}
+	},
+	"loadBalancerInfo": {
+		"targetGroupPairInfoList": [{
+			"targetGroups": [{
+					"name": "ecs-b-Targe-NP1KC1KYAEK1"
+				},
+				{
+					"name": "ecs-b-Targe-1PFVGY72CEI09"
+				}
+			],
+			"prodTrafficRoute": {
+				"listenerArns": [
+					"arn:aws:elasticloadbalancing:us-east-2:111111111111:listener/app/ecs-b-Publi-14GAO5UFNWDMZ/24e50a3e4a4b205c/8f817f85ec2fe816"
+				]
+			},
+			"testTrafficRoute": {
+				"listenerArns": [
+					"arn:aws:elasticloadbalancing:us-east-2:111111111111:listener/app/ecs-b-Publi-14GAO5UFNWDMZ/24e50a3e4a4b205c/b511569563eb2261"
+				]
+			}
+		}]
+	},
+	"ecsServices": [{
+		"serviceName": "ecs-blog-svc",
+		"clusterName": "ecs-blog-ECSCluster-1BC08Z8YA1A5X"
+	}]
+}
