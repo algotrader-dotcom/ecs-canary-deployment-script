@@ -42,3 +42,6 @@ cd ../
 ## 3 - Launch stack
 stack_name='stack-ecs-canary'
 aws cloudformation create-stack --stackname $stack_nameb--template-body file:///stack-ecs-canary.yaml --parameters file:///stack-ecs-canary-params.json 
+
+## 4 - Create ECS service
+aws ecs create-service --cli-input-json file://create_service.json --region eu-west-1
