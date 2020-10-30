@@ -40,8 +40,8 @@ docker push 703043637716.dkr.ecr.eu-west-1.amazonaws.com/$ecs_repo:v2
 cd ../
 
 ## 3 - Launch stack
-stack_name='stack-ecs-canary'
-aws cloudformation create-stack --stackname $stack_name--template-body file:///stack-ecs-canary.yaml --parameters file:///stack-ecs-canary-params.json 
+export stack_name='stack-ecs-canary'
+aws cloudformation create-stack --stackname $stack_name --template-body file:///stack-ecs-canary.yaml --parameters file:///stack-ecs-canary-params.json 
 
 ## 4 - Create ECS service
 aws ecs create-service --cli-input-json file://create_service.json --region eu-west-1
