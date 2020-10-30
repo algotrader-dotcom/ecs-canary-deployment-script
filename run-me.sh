@@ -45,3 +45,8 @@ aws cloudformation create-stack --stackname $stack_nameb--template-body file:///
 
 ## 4 - Create ECS service
 aws ecs create-service --cli-input-json file://create_service.json --region eu-west-1
+
+## 5 - CodeDeploy resources
+aws deploy create-application --application-name ecs-blog-app --compute-platform ECS --region eu-west-1
+
+aws deploy create-deployment-group --cli-input-json file://code_deployment_group.json --region eu-west-1
